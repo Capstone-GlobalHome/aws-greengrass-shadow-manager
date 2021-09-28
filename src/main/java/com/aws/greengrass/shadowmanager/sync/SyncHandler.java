@@ -10,6 +10,7 @@ import com.aws.greengrass.logging.impl.LogManager;
 import com.aws.greengrass.shadowmanager.model.configuration.ThingShadowSyncConfiguration;
 import com.aws.greengrass.shadowmanager.sync.model.CloudDeleteSyncRequest;
 import com.aws.greengrass.shadowmanager.sync.model.CloudUpdateSyncRequest;
+import com.aws.greengrass.shadowmanager.sync.model.Direction;
 import com.aws.greengrass.shadowmanager.sync.model.FullShadowSyncRequest;
 import com.aws.greengrass.shadowmanager.sync.model.LocalDeleteSyncRequest;
 import com.aws.greengrass.shadowmanager.sync.model.LocalUpdateSyncRequest;
@@ -67,6 +68,13 @@ public class SyncHandler {
     @Getter
     @Setter
     private SyncStrategy overallSyncStrategy;
+
+    /**
+     * The direction of syncing shadows to/from the cloud.
+     */
+    @Getter
+    @Setter
+    private Direction syncDirection = Direction.BIDRECTIONAL;
 
     /**
      * The sync strategy factory object to generate.
@@ -189,7 +197,7 @@ public class SyncHandler {
      * @param updateDocument The update shadow request
      */
     public void pushCloudUpdateSyncRequest(String thingName, String shadowName, JsonNode updateDocument) {
-        if (isShadowSynced(thingName, shadowName)) {
+        if (isShadowSynced(thingName, shadowName) && !Direction.FROMCLOUDONLY.equals(syncDirection)) {
             overallSyncStrategy.putSyncRequest(new CloudUpdateSyncRequest(thingName, shadowName, updateDocument));
         }
     }
@@ -203,7 +211,7 @@ public class SyncHandler {
      * @param updateDocument Update document to be applied to local shadow
      */
     public void pushLocalUpdateSyncRequest(String thingName, String shadowName, byte[] updateDocument) {
-        if (isShadowSynced(thingName, shadowName)) {
+        if (isShadowSynced(thingName, shadowName) && !Direction.FROMCLOUDONLY.equals(syncDirection)) {
             overallSyncStrategy.putSyncRequest(new LocalUpdateSyncRequest(thingName, shadowName, updateDocument));
         }
     }
@@ -216,7 +224,7 @@ public class SyncHandler {
      * @param shadowName The shadow name associated with the sync shadow update
      */
     public void pushCloudDeleteSyncRequest(String thingName, String shadowName) {
-        if (isShadowSynced(thingName, shadowName)) {
+        if (isShadowSynced(thingName, shadowName) && !Direction.FROMCLOUDONLY.equals(syncDirection)) {
             overallSyncStrategy.putSyncRequest(new CloudDeleteSyncRequest(thingName, shadowName));
         }
     }
@@ -230,7 +238,7 @@ public class SyncHandler {
      * @param deletePayload Delete response payload containing the deleted shadow version
      */
     public void pushLocalDeleteSyncRequest(String thingName, String shadowName, byte[] deletePayload) {
-        if (isShadowSynced(thingName, shadowName)) {
+        if (isShadowSynced(thingName, shadowName) && !Direction.FROMCLOUDONLY.equals(syncDirection)) {
             overallSyncStrategy.putSyncRequest(new LocalDeleteSyncRequest(thingName, shadowName, deletePayload));
         }
     }
