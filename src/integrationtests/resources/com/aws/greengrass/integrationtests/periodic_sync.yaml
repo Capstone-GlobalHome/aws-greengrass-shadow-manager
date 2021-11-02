@@ -4,7 +4,7 @@ services:
     configuration:
       runWithDefault:
         posixUser: nobody
-  aws.greengrass.ShadowManager:
+  co.mgh.ShadowManager:
     configuration:
       strategy:
         type: periodic
@@ -26,10 +26,10 @@ services:
       startup: echo "Running"
       shutdown: echo "Stopping"
     dependencies:
-      - aws.greengrass.ShadowManager
+      - co.mgh.ShadowManager
     configuration:
       accessControl:
-        aws.greengrass.ShadowManager:
+        co.mgh.ShadowManager:
           policyId1:
             policyDescription: access to CRUD shadow operations
             operations:

@@ -4,7 +4,7 @@ services:
     configuration:
       runWithDefault:
         posixUser: nobody
-  aws.greengrass.ShadowManager:
+  co.mgh.ShadowManager:
     configuration:
       rateLimits:
         maxOutboundSyncUpdatesPerSecond: 2
@@ -31,10 +31,10 @@ services:
         run:
           echo "Running"
     dependencies:
-      - aws.greengrass.ShadowManager
+      - co.mgh.ShadowManager
     configuration:
       accessControl:
-        aws.greengrass.ShadowManager:
+        co.mgh.ShadowManager:
           policyId1:
             policyDescription: access to CRUD shadow operations
             operations:

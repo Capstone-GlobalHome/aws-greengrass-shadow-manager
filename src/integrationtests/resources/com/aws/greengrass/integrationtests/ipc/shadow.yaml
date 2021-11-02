@@ -4,7 +4,7 @@ services:
     configuration:
       runWithDefault:
         posixUser: nobody
-  aws.greengrass.ShadowManager:
+  co.mgh.ShadowManager:
     configuration:
       rateLimits:
         maxLocalRequestsPerSecondPerThing: 100
@@ -19,10 +19,10 @@ services:
         posix:
           sleep 1
     dependencies:
-      - aws.greengrass.ShadowManager
+      - co.mgh.ShadowManager
     configuration:
       accessControl:
-        aws.greengrass.ShadowManager:
+        co.mgh.ShadowManager:
           policyId1:
             policyDescription: access to CRUD shadow operations
             operations:

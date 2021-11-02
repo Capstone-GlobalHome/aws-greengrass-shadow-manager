@@ -1,6 +1,6 @@
 ---
 RecipeFormatVersion: '2020-01-25'
-ComponentName: aws.greengrass.ShadowManager
+ComponentName: co.mgh.ShadowManager
 ComponentDescription: AWS Greengrass Shadow Manager
 ComponentPublisher: AWS
 ComponentVersion: '0.0.0'
@@ -9,4 +9,4 @@ Manifests:
   - Platform:
       os: all
     Artifacts:
-      - URI: s3://$S3_BUCKET/aws.greengrass.ShadowManager.jar
+      - URI: s3://$S3_BUCKET/co.mgh.ShadowManager.jar

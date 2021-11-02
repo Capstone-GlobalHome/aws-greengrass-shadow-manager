@@ -5,4 +5,4 @@ services:
       install:
         all: echo All installed
     dependencies:
-      - aws.greengrass.ShadowManager
+      - co.mgh.ShadowManager

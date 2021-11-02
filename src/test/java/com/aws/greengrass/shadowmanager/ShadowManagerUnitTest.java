@@ -155,7 +155,7 @@ class ShadowManagerUnitTest extends GGServiceTestUtil {
 
     @BeforeEach
     public void setup() {
-        serviceFullName = "aws.greengrass.ShadowManager";
+        serviceFullName = "co.mgh.ShadowManager";
         initializeMockedConfig();
         shadowManager = new ShadowManager(config, mockDatabase, mockDao, mockAuthorizationHandlerWrapper,
                 mockPubSubClientWrapper, mockInboundRateLimiter, mockDeviceConfiguration, mockSynchronizeHelper,

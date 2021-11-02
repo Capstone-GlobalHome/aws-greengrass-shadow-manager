@@ -7,7 +7,7 @@ package com.aws.greengrass.shadowmanager.model;
 
 public final class Constants {
     public static final String SHADOW_RESOURCE_TYPE = "shadow";
-    public static final String SHADOW_MANAGER_NAME = "aws.greengrass.ShadowManager";
+    public static final String SHADOW_MANAGER_NAME = "co.mgh.ShadowManager";
     public static final String SHADOW_PUBLISH_ACCEPTED_TOPIC = "/accepted";
     public static final String SHADOW_PUBLISH_REJECTED_TOPIC = "/rejected";
     public static final String SHADOW_PUBLISH_DELTA_TOPIC = "/delta";

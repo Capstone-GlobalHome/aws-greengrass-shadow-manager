@@ -10,8 +10,8 @@ document storage and synchronization to the AWS IoT Device Shadow Service.
 ```
 Manifests:
   - Dependencies:
-      aws.greengrass.ShadowManager
-  - aws.greengrass.ShadowManager:
+      co.mgh.ShadowManager
+  - co.mgh.ShadowManager:
       Configuration:
         strategy:
           type: periodic // default realTime

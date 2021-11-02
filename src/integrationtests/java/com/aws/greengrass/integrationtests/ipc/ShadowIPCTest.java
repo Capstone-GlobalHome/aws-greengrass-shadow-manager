@@ -154,7 +154,7 @@ class ShadowIPCTest {
         ConfigPlatformResolver.initKernelWithMultiPlatformConfig(kernel, ShadowIPCTest.class.getResource("shadow.yaml"));
         // ensure awaitIpcServiceLatch starts
         CountDownLatch awaitIpcServiceLatch = new CountDownLatch(2);
-        GlobalStateChangeListener listener = IPCTestUtils.getListenerForServiceRunning(awaitIpcServiceLatch, "DoAll", "aws.greengrass.ShadowManager");
+        GlobalStateChangeListener listener = IPCTestUtils.getListenerForServiceRunning(awaitIpcServiceLatch, "DoAll", "co.mgh.ShadowManager");
         kernel.getContext().addGlobalStateChangeListener(listener);
 
         kernel.launch();

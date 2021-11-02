@@ -78,7 +78,7 @@ import static software.amazon.awssdk.aws.greengrass.GreengrassCoreIPCService.UPD
 
 @ImplementsService(name = ShadowManager.SERVICE_NAME)
 public class ShadowManager extends PluginService {
-    public static final String SERVICE_NAME = "aws.greengrass.ShadowManager";
+    public static final String SERVICE_NAME = "co.mgh.ShadowManager";
     private static final List<String> SHADOW_AUTHORIZATION_OPCODES = Arrays.asList(GET_THING_SHADOW,
             UPDATE_THING_SHADOW, LIST_NAMED_SHADOWS_FOR_THING, DELETE_THING_SHADOW, "*");
 
