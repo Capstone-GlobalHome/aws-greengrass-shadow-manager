@@ -6,14 +6,14 @@
 package com.aws.greengrass.shadowmanager;
 
 import com.aws.greengrass.authorization.AuthorizationHandler;
-import com.aws.greengrass.authorization.Permission;
+// import com.aws.greengrass.authorization.Permission;
 import com.aws.greengrass.authorization.exceptions.AuthorizationException;
 import com.aws.greengrass.shadowmanager.model.ShadowRequest;
 
 import java.util.Set;
 import javax.inject.Inject;
 
-import static com.aws.greengrass.shadowmanager.model.Constants.SHADOW_MANAGER_NAME;
+// import static com.aws.greengrass.shadowmanager.model.Constants.SHADOW_MANAGER_NAME;
 
 /**
  * Class to check if ipc requests are authorized.
@@ -67,15 +67,16 @@ public class AuthorizationHandlerWrapper {
     public void doAuthorization(String opCode, String serviceName, String resource)
             throws AuthorizationException {
         // shadow manager is always authorized to update shadows
-        if (serviceName.equals(SHADOW_MANAGER_NAME)) {
-            return;
-        }
-        authorizationHandler.isAuthorized(
-                SHADOW_MANAGER_NAME,
-                Permission.builder()
-                        .principal(serviceName)
-                        .operation(opCode)
-                        .resource(resource)
-                        .build());
+        // if (serviceName.equals(SHADOW_MANAGER_NAME)) {
+        //     return;
+        // }
+        // authorizationHandler.isAuthorized(
+        //         SHADOW_MANAGER_NAME,
+        //         Permission.builder()
+        //                 .principal(serviceName)
+        //                 .operation(opCode)
+        //                 .resource(resource)
+        //                 .build());
+        // TODO disabling authorization should only be temporary, figure out how to authorize RabbitMQ clients
     }
 }
