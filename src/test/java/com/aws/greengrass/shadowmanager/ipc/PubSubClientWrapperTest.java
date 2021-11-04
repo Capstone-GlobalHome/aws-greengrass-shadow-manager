@@ -32,12 +32,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import software.amazon.awssdk.aws.greengrass.model.InvalidArgumentsError;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.time.Instant;
 import java.util.Optional;
 
 import static com.aws.greengrass.shadowmanager.ShadowManager.SERVICE_NAME;
 import static com.aws.greengrass.testcommons.testutilities.ExceptionLogProtector.ignoreExceptionOfType;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -196,5 +198,18 @@ class PubSubClientWrapperTest {
                 .build());
         verify(mockPubSubIPCEventStreamAgent, times(1)).publish(topicCaptor.capture(),
                 payloadCaptor.capture(), serviceNameCaptor.capture());
+    }
+
+    @Test
+    void GIVEN_named_shadow_shadow_pblish_WHEN_format_rabbit_routing_key_THEN_valid_routing_key() {
+        final String thingName = "foo";
+        final String shadowName = "bar";
+        final Operation op = Operation.UPDATE_SHADOW;
+        PubSubRequest request = new PubSubRequest(thingName, shadowName, op, new byte[0]);
+        final String topic = "/delta";
+
+        final String expectedRoutingKey = String.format("%s.%s.update.delta", thingName, shadowName);
+        final String actualRoutingKey = PubSubClientWrapper.getRabbitRoutingKey(request, topic);
+        assertEquals(expectedRoutingKey, actualRoutingKey);
     }
 }
